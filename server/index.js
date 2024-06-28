@@ -23,7 +23,11 @@ io.on("connection", (socket) => {
     console.log("User Disconnect:", socket.id);
     console.log(io.of("/").sockets.size);
   });
+  socket.on("join_room", (data) => {
+    console.log(`User: ${data[0]} has joined Room:${data[1]}`);
+  });
 });
+
 server.listen(8081, () => {
   console.log("Server active and listening on 8080");
 });
