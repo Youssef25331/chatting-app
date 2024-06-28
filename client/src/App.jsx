@@ -1,6 +1,7 @@
 import "./App.css";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
+import Room from "./Room";
 
 const socket = io.connect("http://localhost:8081");
 
@@ -10,29 +11,35 @@ socket.on('hello', (args) => {
 function App() {
 
   useEffect(() => console.log(socket), [socket])
+  const [usernameInput, setUsernameInput] = useState("");
+  const [roomInput, setRoomInput] = useState("");
+
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
 
   function handleUserInput(e) {
-    setUsername(e.target.value);
+    setUsernameInput(e.target.value);
   }
 
   function handleRoomInput(e) {
-    setRoom(e.target.value);
+    setRoomInput(e.target.value);
 
   }
 
   function handleJoin() {
-    socket.emit('join_room', [username,room])
+    setUsername(usernameInput)
+    setRoom(roomInput)
+    socket.emit('join_room', [username, room])
   }
 
   return (
     <div className="App">
       <div className="inputfields">
-        <input onChange={handleUserInput} value={username} />
-        <input onChange={handleRoomInput} value={room} />
+        <input onChange={handleUserInput} value={usernameInput} />
+        <input onChange={handleRoomInput} value={roomInput} />
         <button type="submit" onClick={handleJoin}>click to join</button>
       </div>
+      <Room socket={socket} roomName={room}/>
     </div>
   );
 }
