@@ -39,7 +39,7 @@ function App() {
         <input onChange={handleRoomInput} value={roomInput} />
         <button type="submit" onClick={handleJoin}>click to join</button>
       </div>
-      <Room socket={socket} roomName={room}/>
+      <Room socket={socket} roomName={room} />
     </div>
   );
 }
