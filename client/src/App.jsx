@@ -5,12 +5,8 @@ import Room from "./Room";
 
 const socket = io.connect("http://localhost:8081");
 
-socket.on('hello', (args) => {
-  console.log(args)
-})
 function App() {
 
-  useEffect(() => console.log(socket), [socket])
   const [usernameInput, setUsernameInput] = useState("");
   const [roomInput, setRoomInput] = useState("");
 
@@ -27,8 +23,8 @@ function App() {
   }
 
   function handleJoin() {
-    setUsername(() =>  usernameInput)
-    setRoom(() =>  roomInput)
+    setUsername(() => usernameInput)
+    setRoom(() => roomInput)
     socket.emit('join_room', [usernameInput, roomInput])
   }
 
