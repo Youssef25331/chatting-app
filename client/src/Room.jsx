@@ -13,7 +13,7 @@ function Room({ socket, roomName }) {
       <div className="chat-body">
       </div>
       <div className="chat-footer">
-        .<button type="button" className='leave-button' onClick={leaveRoom}>Leave Room</button>
+        <button type="button" className='leave-button' onClick={leaveRoom}>Leave Room</button>
       </div>
     </div>
 

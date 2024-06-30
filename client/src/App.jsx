@@ -27,9 +27,9 @@ function App() {
   }
 
   function handleJoin() {
-    setUsername(usernameInput)
-    setRoom(roomInput)
-    socket.emit('join_room', [username, room])
+    setUsername(() =>  usernameInput)
+    setRoom(() =>  roomInput)
+    socket.emit('join_room', [usernameInput, roomInput])
   }
 
   return (

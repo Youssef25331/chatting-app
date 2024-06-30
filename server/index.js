@@ -29,7 +29,6 @@ io.on("connection", (socket) => {
   socket.on("join_room", (data) => {
     socket.join(data[1]);
     console.log(`User: ${data[0]} has joined Room:${data[1]}`);
-    console.log(socket.rooms);
   });
 
   socket.on("leave_room", (room) => {
