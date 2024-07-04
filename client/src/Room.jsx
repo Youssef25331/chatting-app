@@ -1,18 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-function Room({ socket, roomName }) {
+function Room({ socket, roomName, username }) {
   const [messageInput, setMessageInput] = useState("");
 
-  const [messages, setMessages] = useState([{date:'1',sender:'alex',content:'hi'}])
+  const [messages, setMessages] = useState([])
+
+
+  function sendMessage(data, sender) {
+    const newMessage = { data: data, sender: sender }
+    setMessages(m => [...m, newMessage])
+    socket.emit('send_message', newMessage)
+    setMessageInput("")
+  }
+  useEffect(() => {
+
+    socket.off('receive_message').on('receive_message', message => {
+      setMessages(m => [...m, message])
+      console.log('hi')
+    })
+  }, [socket])
 
   function leaveRoom() {
     socket.emit('leave_room', roomName)
   }
-
-  function sendMessage() {
-
-  }
-
   return (
     <div>
       <div className="chat-header">
@@ -23,11 +33,12 @@ function Room({ socket, roomName }) {
       </div>
       <div className="chat-footer">
         {
-        messages.map((message) => (<p>{message.sender}:{message.content}</p>))
-      }
+          messages.map((message) => (<p>{message.sender}:{message.data}</p>))
+        }
         <button type="button" className='leave-button' onClick={leaveRoom}>Leave Room</button>
         <input type='text' onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
-        <button onClick={sendMessage} type="">Send</button>
+
+        <button type="button" className='leave-button' onClick={() => sendMessage(messageInput, username)}>send</button>
       </div>
     </div>
 
