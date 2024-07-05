@@ -27,21 +27,18 @@ function Room({ socket, setRoom, roomName, username }) {
     <div className='room-container'>
       <div className="chat-header">
         <h1>{roomName}</h1>
+        <button type="button" id='leave-button' onClick={leaveRoom}>Leave Room</button>
       </div>
       <div className="chat-body">
-        <hr />
-      </div>
-      <div className="chat-footer">
         {
           messages.map((message) => (<p>{message.sender}:{message.data}</p>))
         }
-        <button type="button" className='leave-button' onClick={leaveRoom}>Leave Room</button>
-        <input type='text' placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
-
-        <button type="button" className='send-button' onClick={() => sendMessage(messageInput, username)}>send</button>
+      </div>
+      <div className="chat-footer">
+        <input type='text' id='text-field' placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
+        <button type="button" id='send-button' onClick={() => sendMessage(messageInput, username)}>send</button>
       </div>
     </div>
-
   )
 }
 
