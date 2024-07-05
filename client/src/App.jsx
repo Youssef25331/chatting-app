@@ -30,12 +30,12 @@ function App() {
 
   return (
     <div className="App">
-      <div className="inputfields">
-        <input onChange={handleUserInput} value={usernameInput} />
-        <input onChange={handleRoomInput} value={roomInput} />
-        <button type="submit" onClick={handleJoin}>click to join</button>
+      <div className="input-fields">
+        <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
+        <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
+        <button type="submit" onClick={handleJoin}>Join room</button>
       </div>
-      <Room socket={socket} roomName={room} username={username} />
+      <Room socket={socket} setRoom={setRoom} roomName={room} username={username} />
     </div>
   );
 }
