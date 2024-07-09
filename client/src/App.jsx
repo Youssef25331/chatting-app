@@ -34,8 +34,7 @@ function App() {
         <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
         <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
         <button type="submit" onClick={handleJoin}>Join room</button>
-      </div>
-      <Room socket={socket} setRoom={setRoom} roomName={room} username={username} />
+      </div> <Room socket={socket} setRoom={setRoom} roomName={room} username={username} />
     </div>
   );
 }

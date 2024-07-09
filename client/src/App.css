@@ -1,7 +1,9 @@
 :root {
   --purple: #282634;
   --button-purple: #292854;
+  --button-purple-hover: #100f20;
   --grey: #3a3a3a;
+  --black: #181617;
 }
 *,
 *::before,
@@ -9,7 +11,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Open Sans";
+  font-family: "open sans";
   font-weight: 600;
 }
 
@@ -39,7 +41,13 @@ button {
   padding: 16px 8px;
   font-weight: 800;
 }
-
+button:hover {
+  background-color: var(--button-purple-hover);
+  cursor: pointer;
+}
+h1 {
+  color: white;
+}
 .input-fields {
   position: absolute;
   top: 50%;
@@ -51,9 +59,23 @@ button {
   /* display: none; */
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .chat-footer {
+  display: flex;
   position: absolute;
   bottom: -1px;
   width: 100%;
+}
+#text-field {
+  width: 100%;
+}
+#send-button {
+  width: 96px;
+  height: 64px;
+}
+.chat-header {
+  display: flex;
+  background-color: var(--black);
+  height: 10vh;
 }

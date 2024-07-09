@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
 function Room({ socket, setRoom, roomName, username }) {
   const [messageInput, setMessageInput] = useState("");
 
@@ -26,7 +25,7 @@ function Room({ socket, setRoom, roomName, username }) {
   return (
     <div className='room-container'>
       <div className="chat-header">
-        <h1>{roomName}</h1>
+        <h1>{roomName} placeholder</h1>
         <button type="button" id='leave-button' onClick={leaveRoom}>Leave Room</button>
       </div>
       <div className="chat-body">
@@ -35,7 +34,7 @@ function Room({ socket, setRoom, roomName, username }) {
         }
       </div>
       <div className="chat-footer">
-        <input type='text' id='text-field' placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
+        <input type='text' id='text-field' onSubmit={() => sendMessage(messageInput, username)} placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
         <button type="button" id='send-button' onClick={() => sendMessage(messageInput, username)}>send</button>
       </div>
     </div>
