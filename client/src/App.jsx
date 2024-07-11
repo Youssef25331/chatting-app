@@ -12,6 +12,7 @@ function App() {
 
   const [username, setUsername] = useState("");
   const [room, setRoom] = useState("");
+  const [inRoom, setInRoom] = useState(false)
 
   function handleUserInput(e) {
     setUsernameInput(e.target.value);
@@ -25,16 +26,16 @@ function App() {
   function handleJoin() {
     setUsername(() => usernameInput)
     setRoom(() => roomInput)
+    setInRoom(() => true)
     socket.emit('join_room', [usernameInput, roomInput])
   }
-
   return (
     <div className="App">
-      <div className="input-fields">
+      <div className={inRoom ? "input-fields hidden" : "input-fields"}>
         <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
         <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
         <button type="submit" onClick={handleJoin}>Join room</button>
-      </div> <Room socket={socket} setRoom={setRoom} roomName={room} username={username} />
+      </div> <Room socket={socket} setRoom={setRoom} inRoom={inRoom} setInRoom={setInRoom}roomName={room} username={username} />
     </div>
   );
 }

@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
-function Room({ socket, setRoom, roomName, username }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMessage } from '@fortawesome/free-regular-svg-icons'
+
+function Room({ socket, setRoom, roomName, inRoom,setInRoom, username }) {
   const [messageInput, setMessageInput] = useState("");
 
   const [messages, setMessages] = useState([])
@@ -21,16 +24,19 @@ function Room({ socket, setRoom, roomName, username }) {
   function leaveRoom() {
     socket.emit('leave_room', roomName)
     setRoom('')
+    setInRoom(false)
   }
+  console.log(inRoom)
   return (
-    <div className='room-container'>
+    <div className={inRoom ? "room-container" : "room-container hidden"}>
       <div className="chat-header">
-        <h1>{roomName} placeholder</h1>
+        <FontAwesomeIcon className='icon' icon={faMessage} />
+        <h1>{roomName}</h1>
         <button type="button" id='leave-button' onClick={leaveRoom}>Leave Room</button>
       </div>
       <div className="chat-body">
         {
-          messages.map((message) => (<p>{message.sender}:{message.data}</p>))
+          messages.map((message, index) => (<div className="message-container"><p className={'message-sender'}>{message.sender}</p> <p className={`message`} id={message.sender == username ? "user-message" : "sender-message"}>{message.data}</p></div>))
         }
       </div>
       <div className="chat-footer">

@@ -30,7 +30,6 @@ input:focus {
   color: white;
   background-color: var(--grey);
   border: none;
-  margin: 2px;
   padding: 16px 8px;
   outline: none;
 }
@@ -48,22 +47,23 @@ button:hover {
 h1 {
   color: white;
 }
+.hidden {
+  display: none !important;
+}
 .input-fields {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: none;
 }
 .room-container {
-  /* display: none; */
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 .chat-footer {
   display: flex;
-  position: absolute;
+  position: sticky;
   bottom: -1px;
   width: 100%;
 }
@@ -76,6 +76,41 @@ h1 {
 }
 .chat-header {
   display: flex;
+  position: fixed;
   background-color: var(--black);
+  width: 100%;
   height: 10vh;
+  justify-content: space-between;
+  align-items: center;
+}
+.icon {
+  color: white;
+  margin-left: 16px;
+}
+#leave-button {
+  background-color: var(--black);
+}
+.message-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+.message {
+  box-sizing: border-box;
+  margin: 8px 24px;
+  padding: 8px 16px;
+  border-radius: 24px;
+  width: fit-content;
+  min-width: 64px;
+  max-width: 256px;
+  overflow-wrap: break-word;
+}
+#user-message {
+  background-color: #008bfc;
+}
+#sender-message {
+  background-color: green;
+}
+.message-sender {
+  color: white;
 }
