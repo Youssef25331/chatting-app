@@ -8,11 +8,15 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
 
   const containerRef = useRef(null)
 
-  function sendMessage(data, sender) {
-    const newMessage = { data: data, sender: sender }
-    setMessages(m => [...m, newMessage])
-    socket.emit('send_message', newMessage)
-    setMessageInput("")
+  function sendMessage(event, data, sender) {
+
+    event.preventDefault();
+    if (messageInput) {
+      const newMessage = { data: data, sender: sender }
+      setMessages(m => [...m, newMessage])
+      socket.emit('send_message', newMessage)
+      setMessageInput("")
+    }
   }
   useEffect(() => {
 
@@ -39,9 +43,11 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
           messages.map((message, index) => (<div className="message-container"><p className={'message-sender'}>{message.sender}</p> <p className={`message`} id={message.sender == username ? "user-message" : "sender-message"}>{message.data}</p></div>))
         }
       </div>
-      <div className="chat-footer">
-        <input type='text' autoComplete={'off'} id='text-field' onSubmit={() => sendMessage(messageInput, username)} placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
-        <button type="button" id='send-button' onClick={() => sendMessage(messageInput, username)}>send</button>
+      <div >
+        <form className="chat-footer" onSubmit={(e) => sendMessage(e, messageInput, username)}>
+          <input type='text' autoComplete={'off'} id='text-field' placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
+          <button type="submit" id='send-button'>Send</button>
+        </form>
       </div>
     </div>
   )
