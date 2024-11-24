@@ -1,7 +1,7 @@
-import "./App.css";
 import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import Room from "./Room";
+import "./App.css";
 
 const socket = io.connect("http://localhost:8081");
 

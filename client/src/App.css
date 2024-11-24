@@ -61,12 +61,6 @@ h1 {
   flex-direction: column;
   height: 100%;
 }
-.chat-footer {
-  display: flex;
-  position: sticky;
-  bottom: -1px;
-  width: 100%;
-}
 #text-field {
   width: 100%;
 }
@@ -74,6 +68,7 @@ h1 {
   width: 96px;
   height: 64px;
 }
+
 .chat-header {
   display: flex;
   position: fixed;
@@ -83,6 +78,20 @@ h1 {
   justify-content: space-between;
   align-items: center;
 }
+
+.chat-body {
+  margin: 10vh 0;
+}
+.chat-footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+/* .chat-footer.fixed-bar {
+  position: fixed;
+  bottom: 0;
+} */
 .icon {
   color: white;
   margin-left: 16px;

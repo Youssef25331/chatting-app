@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMessage } from '@fortawesome/free-regular-svg-icons'
 
-function Room({ socket, setRoom, roomName, inRoom,setInRoom, username }) {
+function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
   const [messageInput, setMessageInput] = useState("");
-
   const [messages, setMessages] = useState([])
 
+  const containerRef = useRef(null)
 
   function sendMessage(data, sender) {
     const newMessage = { data: data, sender: sender }
@@ -26,9 +26,9 @@ function Room({ socket, setRoom, roomName, inRoom,setInRoom, username }) {
     setRoom('')
     setInRoom(false)
   }
-  console.log(inRoom)
+
   return (
-    <div className={inRoom ? "room-container" : "room-container hidden"}>
+    <div className={inRoom ? "room-container" : "room-container hidden"} ref={containerRef}>
       <div className="chat-header">
         <FontAwesomeIcon className='icon' icon={faMessage} />
         <h1>{roomName}</h1>
@@ -40,7 +40,7 @@ function Room({ socket, setRoom, roomName, inRoom,setInRoom, username }) {
         }
       </div>
       <div className="chat-footer">
-        <input type='text' id='text-field' onSubmit={() => sendMessage(messageInput, username)} placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
+        <input type='text' autoComplete={'off'} id='text-field' onSubmit={() => sendMessage(messageInput, username)} placeholder={`Message people in ${roomName}`} onChange={(e) => setMessageInput(e.target.value)} value={messageInput} />
         <button type="button" id='send-button' onClick={() => sendMessage(messageInput, username)}>send</button>
       </div>
     </div>
