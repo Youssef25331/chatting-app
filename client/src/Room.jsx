@@ -8,6 +8,12 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
 
   const containerRef = useRef(null)
 
+  const scrollToBottom = () => {
+    window.scrollTo({
+      top: document.body.scrollHeight,
+    });
+  };
+
   function sendMessage(event, data, sender) {
 
     event.preventDefault();
@@ -24,6 +30,9 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
       setMessages(m => [...m, message])
     })
   }, [socket])
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   function leaveRoom() {
     socket.emit('leave_room', roomName)
