@@ -6,7 +6,17 @@ import "./App.css";
 const socket = io.connect("http://localhost:8081");
 
 function App() {
+  const [isConnected, setIsConnected] = useState(false)
+  const [connectionTimeout, setConnectionTimeout] = useState(false)
 
+  useEffect(() => {
+    socket.on('connect', () => {
+      setIsConnected(true);
+    })
+    socket.on('connect_error', () => {
+      setConnectionTimeout(true)
+    })
+  }, [])
   const [usernameInput, setUsernameInput] = useState("");
   const [roomInput, setRoomInput] = useState("");
 
@@ -31,11 +41,19 @@ function App() {
   }
   return (
     <div className="App">
-      <div className={inRoom ? "input-fields hidden" : "input-fields"}>
-        <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
-        <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
-        <button type="submit" onClick={handleJoin}>Join room</button>
-      </div> <Room socket={socket} setRoom={setRoom} inRoom={inRoom} setInRoom={setInRoom}roomName={room} username={username} />
+      {
+
+        isConnected ? (
+          <>
+            <div className={inRoom ? "input-fields hidden" : "input-fields"}>
+              <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
+              <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
+              <button type="submit" onClick={handleJoin}>Join room</button>
+            </div> <Room socket={socket} setRoom={setRoom} inRoom={inRoom} setInRoom={setInRoom} roomName={room} username={username} />
+          </>
+        ) : connectionTimeout ? <h1 className="connection-message">Connection timeout make sure you can connect to the server.</h1> : <h1 className="connection-message">Attempting to connect to the server...</h1>
+
+      }
     </div>
   );
 }
