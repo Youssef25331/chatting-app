@@ -61,9 +61,11 @@ h1 {
 }
 .input-fields {
   position: absolute;
+  display:flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  gap:4px;
 }
 .room-container {
   display: flex;
@@ -131,9 +133,10 @@ h1 {
   padding: 8px 16px;
   border-radius: 24px;
   width: fit-content;
-  min-width: 64px;
+  min-width: 32px;
   max-width: 256px;
   overflow-wrap: break-word;
+  color:var(--black)
 }
 #user-message {
   background-color: #008bfc;

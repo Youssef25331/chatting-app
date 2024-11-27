@@ -11,7 +11,7 @@ function App() {
 
   useEffect(() => {
     socket.on('connect', () => {
-      setIsConnected(true);
+      setIsConnected(true)
     })
     socket.on('connect_error', () => {
       setConnectionTimeout(true)
@@ -30,14 +30,22 @@ function App() {
 
   function handleRoomInput(e) {
     setRoomInput(e.target.value);
-
   }
 
-  function handleJoin() {
-    setUsername(() => usernameInput)
-    setRoom(() => roomInput)
-    setInRoom(() => true)
-    socket.emit('join_room', [usernameInput, roomInput])
+  function handleJoin(event) {
+    event.preventDefault()
+    if (usernameInput && roomInput) {
+      if (usernameInput.length >= 4) {
+        setUsername(() => usernameInput)
+        setRoom(() => roomInput.toUpperCase().trimEnd())
+        setInRoom(() => true)
+        socket.emit('join_room', [usernameInput, roomInput.toUpperCase().trimEnd()])
+      } else (
+        alert('make sure the username is atleast 4 letters long')
+      )
+    } else {
+      alert("Please make sure to type a valid usename and room")
+    }
   }
   return (
     <div className="App">
@@ -45,11 +53,12 @@ function App() {
 
         isConnected ? (
           <>
-            <div className={inRoom ? "input-fields hidden" : "input-fields"}>
+            <form className={inRoom ? "hidden" : "input-fields"} onSubmit={((e) => handleJoin(e))}>
               <input placeholder="Enter username...." onChange={handleUserInput} value={usernameInput} />
               <input placeholder="Enter room name...." onChange={handleRoomInput} value={roomInput} />
-              <button type="submit" onClick={handleJoin}>Join room</button>
-            </div> <Room socket={socket} setRoom={setRoom} inRoom={inRoom} setInRoom={setInRoom} roomName={room} username={username} />
+              <button type="submit">Join room</button>
+            </form>
+            <Room socket={socket} setRoom={setRoom} inRoom={inRoom} setInRoom={setInRoom} roomName={room} username={username} />
           </>
         ) : connectionTimeout ? <h1 className="connection-message">Connection timeout make sure you can connect to the server.</h1> : <h1 className="connection-message">Attempting to connect to the server...</h1>
 

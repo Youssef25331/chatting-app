@@ -17,7 +17,7 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
 
   useEffect(() => {
     scrollToBottom()
-  }, [messageInput])
+  }, [messages])
 
   function sendMessage(event, data, sender) {
     event.preventDefault();
