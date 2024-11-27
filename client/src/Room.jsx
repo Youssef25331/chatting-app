@@ -15,10 +15,10 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
   };
 
   function sendMessage(event, data, sender) {
-
     event.preventDefault();
-    if (messageInput) {
-      const newMessage = { data: data, sender: sender }
+
+    if (data&&data.trimEnd()!='') {
+      const newMessage = { data: data.trimEnd(), sender: sender }
       setMessages(m => [...m, newMessage])
       socket.emit('send_message', newMessage)
       setMessageInput("")
@@ -30,6 +30,7 @@ function Room({ socket, setRoom, roomName, inRoom, setInRoom, username }) {
       setMessages(m => [...m, message])
     })
   }, [socket])
+
   useEffect(() => {
     scrollToBottom()
   }, [messages])
