@@ -21,3 +21,15 @@ Open [http://localhost](http://localhost:8080) to view the app in your browser.
 
 Type the desired username and room name and you will be able to chat with the users connected to the same room.
 
+# Resource
+
+Library: [Socket.io](https://socket.io)
+
+Hosting: [Firebase](https://firebase.google.com)
+
+# Preview
+
+![Login](https://github.com/user-attachments/assets/959dd71b-05c2-4a2d-bc8e-fb0ee70bc892)
+
+![Main](https://github.com/user-attachments/assets/4ae10e8f-0272-4297-aa47-c342e8d6ad06)
+
