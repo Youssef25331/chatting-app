@@ -2,6 +2,7 @@ import io from "socket.io-client";
 import { useEffect, useState } from "react";
 import Room from "./Room";
 import "./App.css";
+import app from "./config/firebase.js";
 
 const socket = io.connect("http://localhost:8081");
 
