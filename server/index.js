@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:8080",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -46,7 +46,7 @@ io.on("connection", (socket) => {
 });
 
 server.listen(8081, () => {
-  console.log("Server active and listening on 8080");
+  console.log("Server active and listening on 8081");
 });
 
 export default app;

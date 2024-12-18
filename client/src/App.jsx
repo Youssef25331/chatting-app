@@ -4,7 +4,7 @@ import Room from "./Room";
 import "./App.css";
 import app from "./config/firebase.js";
 
-const socket = io.connect("http://localhost:8081");
+const socket = io.connect("https://apissef25331s-projects.vercel.app");
 
 function App() {
   const [isConnected, setIsConnected] = useState(false)
