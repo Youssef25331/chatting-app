@@ -7,5 +7,8 @@ client/node_modules/.
 server/node_modules/.
 
 #Build directories
-client/build/.
-server/build/.
+client/build/
+server/build/
+
+#Firebase
+functions/

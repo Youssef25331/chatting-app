@@ -46,5 +46,7 @@ io.on("connection", (socket) => {
 });
 
 server.listen(8081, () => {
-  console.log("Server active and listening on 8081");
+  console.log("Server active and listening on 8080");
 });
+
+export default app;
