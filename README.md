@@ -8,7 +8,7 @@ In the server directory, you can run:
 
 ### `npm start`
 
-Runs the server in your console.\
+Runs the server in your console.
 
 In the console you will see The user's name, id and messages sent between them.
 
