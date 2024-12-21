@@ -23,6 +23,8 @@ Type the desired username and room name and you will be able to chat with the us
 
 # Resource
 
+Website: ~~Currently Unavaialble~~
+
 Library: [Socket.io](https://socket.io)
 
 Hosting: [Firebase](https://firebase.google.com)
